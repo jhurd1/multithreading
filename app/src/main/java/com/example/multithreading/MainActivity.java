@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.lang.Thread;
 
 import android.os.Bundle;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -14,21 +17,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public static void main(String[] args)
+
+    public void oddsButton(View oddsButton)
     {
-       Runnable r = new Runnable() {
-           int odds = 0;
-           @Override
-           public void run() throws InterruptedException {
-               for(odds = 0; odds < 100; odds++)
-               {
-                   while (odds % 2 != 0)
-                   {
-                       System.out.println(odds);
-                       Thread.sleep(250);
-                   }
-               }
-           }
-       };
+        oddCount oc = new oddCount(this);
+        Thread t = new Thread(oc, "oddThread");
+        t.start();
+    }
+
+    public void evensButton(View evensButton)
+    {
+        evenCount ec = new evenCount(this);
+        Thread t = new Thread(ec, "evenThread");
+        t.start();
     }
 }

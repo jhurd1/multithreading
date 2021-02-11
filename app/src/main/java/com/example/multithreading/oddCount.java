@@ -1,24 +1,23 @@
 package com.example.multithreading;
-
 import android.app.Activity;
 import android.widget.Toast;
 
-public class evenCount implements Runnable
+public class oddCount implements Runnable
 {
-    private final Activity ma;
+    private final Activity a;
 
-    public evenCount(MainActivity ma) {
-        this.ma = ma;
+    public oddCount(MainActivity mainActivity) {
+
+        this.a = mainActivity;
     }
 
     @Override
     public void run() {
-        int evens;
-        for(evens = 0; evens < 100; evens++)
+        for(int odds = 0; odds < 100; odds++)
         {
-            if (evens % 2 == 0)
+            if (odds % 2 != 0)
             {
-                System.out.println(evens);
+                System.out.println(odds);
                 try {
                     Thread.sleep(250);
                 } catch (InterruptedException e) {
@@ -26,12 +25,12 @@ public class evenCount implements Runnable
                 }
             }
         }
-        ma.runOnUiThread(new Runnable()
+        a.runOnUiThread(new Runnable()
         {
             @Override
             public void run()
             {
-                Toast toast = Toast.makeText(ma, "Counting evens complete", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(a, "Counting odds complete", Toast.LENGTH_SHORT);
                 toast.show();
             }
         });
